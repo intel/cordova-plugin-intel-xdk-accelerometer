@@ -1,11 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2015 Intel Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
+except in compliance with the License. You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the 
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. See the License for the specific language governing permissions 
+and limitations under the License
+-->
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-  id="intel.xdk.accelerometer"
-  version="0.0.1">
-  <name>Intel XDK Accelerometer</name>
-  <description>Intel XDK Accelerometer Plugin</description>
-  <license>Apache 2.0</license>
-  <keywords>intel,xdk,accelerometer</keywords>
+    id="intel.xdk.accelerometer"
+    version="1.1.1">
+    <name>Intel XDK Accelerometer</name>
+    <description>Intel XDK Accelerometer Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>Intel XDK,intel.xdk,accelerometer</keywords>
+    <repo>https://github.com/01org/cordova-plugin-intel-xdk-accelerometer.git</repo>
+    <issue></issue>
+
+    <js-module src="www/accelerationOptions.js" name="accelerationOptions">
+        <clobbers target="intel.xdk.accelerationOptions" />
+    </js-module>
+
+    <js-module src="www/acceleration.js" name="acceleration">
+        <clobbers target="intel.xdk.acceleration" />
+    </js-module>
+
+    <js-module src="www/accelerometer.js" name="accelerometer">
+        <clobbers target="intel.xdk.accelerometer" />
+    </js-module>
+
+   <!-- wp8 -->
+    <platform name="wp8">
+        <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+            <Capability Name="ID_CAP_SENSORS" />
+        </config-file>
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="IntelXDKAccelerometer">
+                <param name="wp-package" value="IntelXDKAccelerometer"/>
+            </feature>
+        </config-file>
+
+       <source-file src="src/wp8/Accelerometer.cs" />
+    </platform>
+
+    <!-- windows8 -->
+    <platform name="windows8">
+        <config-file target="package.appxmanifest" parent="/Package/Capabilities">
+            <DeviceCapability Name="webcam" />
+        </config-file>
+
+        <js-module src="src/windows8/accelerometerProxy.js" name="AccelerometerProxy">
+            <merges target="" />
+        </js-module>
+    </platform>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="IntelXDKAccelerometer">
+                <param name="android-package" value="com.intel.xdk.accelerometer.Accelerometer"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+        </config-file>
+
+        <source-file src="src/android/Accelerometer.java" target-dir="src/com/intel/xdk/accelerometer" />
+    </platform>
+
+    <!-- iOS -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IntelXDKAccelerometer">
+                <param name="ios-package" value="XDKAccelerometer" />
+            </feature>
+        </config-file>
+    
+        <header-file src="src/ios/XDKAccelerometer.h" />
+        <header-file src="src/ios/XDKAccelerometerFilter.h" />
+        <source-file src="src/ios/XDKAccelerometer.m" />
+        <source-file src="src/ios/XDKAccelerometerFilter.m" />
+    </platform>
 
 </plugin>

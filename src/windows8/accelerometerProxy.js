@@ -81,8 +81,4 @@ and limitations under the License
 
         intel.xdk.accelerometer._accel = new intel.xdk.acceleration.Acceleration(x, y, z, false);
         SuccessCallback(new intel.xdk.acceleration.Acceleration(x, y, z, false));
-        //successCallback(new intel.xdk.acceleration.Acceleration(x, y, z, false));
-        //string.Format("{0,5:0.000}", x),
-        //string.Format("{0,5:0.000}", y),
-        //string.Format("{0,5:0.000}", z));
     }

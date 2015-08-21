@@ -131,7 +131,7 @@ public class Accelerometer extends CordovaPlugin  implements SensorListener{
 				x = oldy;
 			}
 			//wrapped in try/catch to fix errors after closing can roll in appLab
-			String js = "javascript:intel.xdk.accelerometer.setAcceleration(new intel.xdk.acceleration.Acceleration("+x+","+y+","+z+",false));";
+			String js = "javascript:try{intel.xdk.accelerometer.setAcceleration(new intel.xdk.acceleration.Acceleration("+x+","+y+","+z+",false));}catch(e){}";
 			//String js = "javascript:new intel.xdk.acceleration.Acceleration("+x+","+y+","+z+",false);";
 			//String js = "javascript:console.log('before'); new intel.xdk.acceleration.Acceleration("+x+","+y+","+z+",false);console.log('after'); ";
 			//String js = "javascript:alert('0');";

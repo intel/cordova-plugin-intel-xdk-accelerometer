@@ -26,13 +26,13 @@ and limitations under the License
             SuccessCallback = successCallback;
             ErrorCallback = errorCallback;
 
-            if (params.Length > 0)
+            if (params.length > 0)
                 time = params[0];
 
-            if (params.Length > 1)
+            if (params.length > 1)
                 adjustForRotation = params[1];
 
-            if (params.Length > 2)
+            if (params.length > 2)
                 orientation = params[2];
 
             if (!this.isRunning)

@@ -1,3 +1,4 @@
+
 /*
 Copyright 2015 Intel Corporation
 
@@ -67,7 +68,10 @@ module.exports = {
 			if(typeof(options.adjustForRotation)=="boolean") _options.adjustForRotation = options.adjustForRotation;
 		}
 		//AppMobiAccelerometer.start(_options.frequency);
-		exec(null, null, "IntelXDKAccelerometer", "start", [_options.frequency]);
+		exec(function (info) {
+		    intel.xdk.accelerometer._accel = info;
+		}, null, "IntelXDKAccelerometer", "start", [_options.frequency]);
+
 		this.getCurrentAcceleration(successCallback, _options);
 		return setInterval(function() {
 			intel.xdk.accelerometer.getCurrentAcceleration(successCallback, _options);

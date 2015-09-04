@@ -1,3 +1,4 @@
+
 /*
 Copyright 2015 Intel Corporation
 
@@ -61,7 +62,7 @@ and limitations under the License
             }
         },
         getAccelerometerReading: function (successCallback, errorCallback, params) {
-            SuccessCallback(intel.xdk.accelerometer._accel);
+            SuccessCallback(intel.xdk.accelerometer._accel, { keepCallback: true });
         }
     });
 
@@ -72,13 +73,6 @@ and limitations under the License
         var y = reading.accelerationY;
         var z = reading.accelerationZ;
 
-        if (Windows.Graphics.Display.DisplayProperties.currentOrientation == Windows.Graphics.Display.DisplayOrientations.portrait
-            || Windows.Graphics.Display.DisplayProperties.currentOrientation == Windows.Graphics.Display.DisplayOrientations.portraitFlipped) {
-            var oldx = x, oldy = y;
-            y = oldx * -1;
-            x = oldy;
-        }
-
         intel.xdk.accelerometer._accel = new intel.xdk.acceleration.Acceleration(x, y, z, false);
-        SuccessCallback(new intel.xdk.acceleration.Acceleration(x, y, z, false));
+        SuccessCallback(new intel.xdk.acceleration.Acceleration(x, y, z, false), { keepCallback: true });
     }
